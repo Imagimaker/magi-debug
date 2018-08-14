@@ -9,7 +9,11 @@
     },
     "files": [
         "README.md",
-        "main.ts"
+        "main.ts",
+        "_locales/zh/Magibit-strings.json"
+    ],
+    "testFiles": [
+        "test.ts"
     ],
     "public": true
 }
