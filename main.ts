@@ -256,23 +256,31 @@ namespace magibit {
     let time_end = 0 ;
     let time_begin = 0 ;
     let distance = 0 ;
-    let data = 0 ;
+    let data = [] ;
+    let totData = 0 ;
+    let avrData=0;
     // 获取超声波模块，上一个周期中高电平的时间
-    function getTime() {
-        data = 0 ;
+    function getTimestemp() {
+        let timestemp = 0;
+        let time_end = 0 ;
+        let time_begin = 0 ;
         while (pins.digitalReadPin(DigitalPin.P0) == 0) {
           
         }
         time_begin = input.runningTimeMicros() ;
         while (pins.digitalReadPin(DigitalPin.P0) == 1 && data < 27400) {
             time_end = input.runningTimeMicros() ;
-            data = time_end - time_begin ;
+            timestemp = time_end - time_begin ;
         }
+        return timestemp;
     }
-
-    getTime() ;
+    for (let i=0;i<10;i++){
+      data[i]=getTimestemp();
+      totData+==data[i];
+    }
+    avrData=totData/10;
     // 将高电平时间转化为距离（单位为cm）
-    distance = data *1;
+    distance = avrData;
 
     // 针对不同区间段的数据，做对应的数据处理
     // if (distance > 8.5 && distance < 10) {
