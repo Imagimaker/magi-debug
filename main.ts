@@ -268,7 +268,7 @@ namespace magibit {
           
         }
         time_begin = input.runningTimeMicros() ;
-        while (pins.digitalReadPin(DigitalPin.P0) == 1 && timestemp < 27400) {
+        while (pins.digitalReadPin(DigitalPin.P0) == 1 && timestemp < 60000) {
             time_end = input.runningTimeMicros() ;
             timestemp = time_end - time_begin ;
         }
