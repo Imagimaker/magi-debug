@@ -256,7 +256,7 @@ namespace magibit {
     let time_end = 0 ;
     let time_begin = 0 ;
     let distance = 0 ;
-    let data = [] ;
+
     let totData = 0 ;
     let avrData=0;
     // 获取超声波模块，上一个周期中高电平的时间
@@ -275,8 +275,7 @@ namespace magibit {
         return timestemp;
     }
     for (let i=0;i<10;i++){
-      data[i]=getTimestemp();
-      totData+=data[i];
+      totData+=getTimestemp();
     }
     avrData=totData/10;
     // 将高电平时间转化为距离（单位为cm）
