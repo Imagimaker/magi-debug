@@ -276,7 +276,7 @@ namespace magibit {
     }
     for (let i=0;i<10;i++){
       data[i]=getTimestemp();
-      totData+==data[i];
+      totData+=data[i];
     }
     avrData=totData/10;
     // 将高电平时间转化为距离（单位为cm）
