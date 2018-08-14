@@ -272,7 +272,7 @@ namespace magibit {
 
     getTime() ;
     // 将高电平时间转化为距离（单位为cm）
-    distance = data * 0.015 ;
+    distance = data *15/1000 ;
     // 针对不同区间段的数据，做对应的数据处理
     // if (distance > 8.5 && distance < 10) {
     //     distance = distance * (distance / 10) ;
