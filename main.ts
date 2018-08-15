@@ -64,9 +64,11 @@ namespace magibit {
   }
 
   export enum SampleTimes {
-   //% block=
+    //% blockId="OneTime" block="OneTime"
     OneTime=1,
+    //% blockId="ThreeTimes" block="ThreeTimes"
     ThreeTimes=3,
+    //% blockId="SevenTimes" block="SevenTimes"
     SevenTimes=7
   } 
 
@@ -255,28 +257,41 @@ namespace magibit {
    * @return number returns ultrasonic range from 3-400cm. It's only used with seeedstudio's ultrasonic grove module.
    */
   //% blockId=ultrasonic_sensor_range_read
-  //% block="📡Read ultrasonic(cm) at |%pin|"
+  //% block="📡Read ultrasonic(cm) at %pin| and set sample times %times"
   //% blockGap=16
   //% weight=73
 
-  export function UltrasonicReadValue(pin: UltrasonicSensorPins): number {
+  export function UltrasonicReadValue(pin: UltrasonicSensorPins, times:SampleTimes): number {
     let time_end: number = 0 ;
     let time_begin: number = 0 ;
     let distance: number = 0 ;
 
     let totData: number = 0 ;
     let avrData: number=0;
-    let times=10;
+
+    let digPin: number ;
+    switch (pin) {
+      case UltrasonicSensorPins.P0:
+        digPin=DigitalPin.P0;
+        break;
+      case UltrasonicSensorPins.P1:
+        digPin=DigitalPin.P1;
+        break;
+      case UltrasonicSensorPins.P2:
+        digPin=DigitalPin.P2;
+        break;
+    }
+
     // 获取超声波模块，上一个周期中高电平的时间
     function getTimestemp() {
         let timestemp = 0;
         let time_end = 0 ;
         let time_begin = 0 ;
-        while (pins.digitalReadPin(DigitalPin.P0) == 0) {
+        while (pins.digitalReadPin(digPin) == 0) {
           
         }
         time_begin = input.runningTimeMicros() ;
-        while (pins.digitalReadPin(DigitalPin.P0) == 1 && timestemp < 60000) {
+        while (pins.digitalReadPin(digPin) == 1 && timestemp < 60000) {
             time_end = input.runningTimeMicros() ;            
         }
         timestemp = time_end - time_begin ;
@@ -353,7 +368,7 @@ namespace magibit {
     let velocity: number = table[tableCnt];
 
      //转换成厘米
-    distance = velocity * (avrData/20000);
+    distance = velocity *  avrData / 20000 ;
       return distance;
 
   }
