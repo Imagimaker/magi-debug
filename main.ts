@@ -351,13 +351,11 @@ namespace magibit {
    
     let tableCnt: number = Math.round(tableIndex%25);
     let velocity: number = table[tableCnt];
-    return velocity;
-    //   let tableCnt: number = Math.round(tableIndex%25);
-    //   let velocity: number = table[tableCnt];
-    // //转换成厘米
-    // distance = velocity * (avrData/2000)/10;
-    // console.log(distance);
-    // return distance;
+
+     //转换成厘米
+    distance = velocity * (avrData/20000);
+      return distance;
+
   }
 
 
